@@ -1,11 +1,25 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Deploy Task'
+description: 'Deploy a Parasoft Service Virtualization environment'
+author: 'Parasoft'
 inputs:
-  milliseconds: # change this
+  ctpUrl:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'CTP URL'
+  ctpUsername:
+    required: true
+    description: 'CTP Username'
+  ctpPassword:
+    required: true
+    description: 'CTP Password'
+  system:
+    required: true
+    description: 'Name of the system'
+  environment:
+    required: true
+    description: 'Name of the environment'
+  instance:
+    required: true
+    description: 'Name of the environment instance to provision'
 runs:
   using: 'node12'
   main: 'dist/index.js'
