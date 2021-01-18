@@ -21,4 +21,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          milliseconds: 1000
+          ctpUrl: 'http://104.42.225.105/em'
+          ctpUsername: 'admin'
+          ctpPassword: 'admin'
+          system: 'ParaBank'
+          environment: 'Golden'
+          instance: 'Negative'
