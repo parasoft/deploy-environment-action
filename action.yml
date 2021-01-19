@@ -41,7 +41,7 @@ inputs:
   repoPort:
     required: false
     description: 'The port of the data repository server'
-  repoUser:
+  repoUsername:
     required: false
     description: 'The username of the data repository server'
   repoPassword:

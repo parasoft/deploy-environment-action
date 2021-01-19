@@ -177,7 +177,7 @@ async function run(): Promise<void> {
             var dataRepoSettings = {
                 "host": duplicateType === 'target' ? server.host : core.getInput('repoHost'),
                 "port": core.getInput('repoPort'),
-                "username": core.getInput('repoUser'),
+                "username": core.getInput('repoUsername'),
                 "password": core.getInput('repoPassword'),
             }
             copyEnv.dataRepoSettings = dataRepoSettings;
