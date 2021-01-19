@@ -180,6 +180,11 @@ function run() {
         var environmentId;
         var instanceName = core.getInput('instance');
         var instanceId;
+        var copyToVirtualize = core.getInput('copyToVirtualize');
+        var duplicateDataRepo = core.getInput('duplicateDataRepo');
+        var virtualizeName = core.getInput('virtServerName');
+        var newEnvironmentName = core.getInput('newEnvironmentName');
+        var virtualizeServerId;
         var instancesPromise = findInEM('/api/v2/systems', 'systems', systemName).then((system) => {
             core.debug('Found system ' + system.name + ' with id ' + system.id);
             systemId = system.id;
@@ -188,6 +193,34 @@ function run() {
             environmentId = environment.id;
             return findInEM('/api/v2/environments/' + environmentId + '/instances', 'instances', instanceName);
         });
+        if (copyToVirtualize === 'true') {
+            instancesPromise = instancesPromise.then((instance) => {
+                return findInEM('/api/v2/servers', 'servers', virtualizeName);
+            }).then((server) => {
+                virtualizeServerId = server.id;
+                var duplicateType = core.getInput('duplicateType');
+                var copyEnv = {
+                    originalEnvId: environmentId,
+                    serverId: virtualizeServerId,
+                    newEnvironmentName: newEnvironmentName,
+                    copyDataRepo: duplicateDataRepo
+                };
+                if (duplicateType === 'target' || duplicateType === 'custom') {
+                    var dataRepoSettings = {
+                        "host": duplicateType === 'target' ? server.host : core.getInput('repoHost'),
+                        "port": core.getInput('repoPort'),
+                        "username": core.getInput('repoUsername'),
+                        "password": core.getInput('repoPassword'),
+                    };
+                    copyEnv.dataRepoSettings = dataRepoSettings;
+                    console.log("Data repo host: " + dataRepoSettings.host);
+                }
+                return postToEM('/api/v2/environments/copy?async=false', copyEnv);
+            }).then((copyResult) => {
+                environmentId = copyResult.environmentId;
+                return findInEM('/api/v2/environments/' + environmentId + '/instances', 'instances', instanceName);
+            });
+        }
         instancesPromise.then((instance) => {
             instanceId = instance.id;
             return postToEM('/api/v2/provisions', {
