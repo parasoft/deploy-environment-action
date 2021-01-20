@@ -37,7 +37,7 @@ inputs:
     description: 'Duplicate associated data repositories before provisioning'
   duplicateType:
     required: false
-    description: '"Where to duplicate data repository'
+    description: 'Where to duplicate data repository'
   repoHost:
     required: false
     description: 'The host of the data repository server'
