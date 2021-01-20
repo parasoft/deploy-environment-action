@@ -2,20 +2,21 @@
   <a href="https://github.com/parasoft/deploy-environment-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
 </p>
 
-# Deploy an environment v1
+# Deploy an Environment
 
 This action allows you to deploy a Parasoft service virtualization environment to a given Continous Testing Platform endpoint.
 
 ## Usage
 
-Add the following to your github workflow yml file with the required inputs
+Add the following to your github workflow yml file with the required inputs.
+Password will use a github encrypted secret. Please reference [Encrypted Secrets Documentation](https://docs.github.com/en/actions/reference/encrypted-secrets) on how to create an encrypted secret.
 
 ```yaml
 uses: parasoft/deploy-environment-action@v1
 with:
   ctpUrl: 'http://exampleUrl'
   ctpUsername: 'username'
-  ctpPassword: 'password'
+  ctpPassword: ${{ secrets.password }}
   system: 'system'
   environment: 'environment'
   instance: 'instance'
