@@ -226,7 +226,7 @@ function run() {
             return postToEM('/api/v2/provisions', {
                 environmentId: environmentId,
                 instanceId: instanceId,
-                abortOnFailure: false
+                abortOnFailure: core.getInput('abortOnFailure') === 'true'
             });
         }).then((res) => {
             var eventId = res.eventId;
@@ -245,7 +245,9 @@ function run() {
                     }
                     else {
                         core.error('Provisioning failed with status:  ' + status);
-                        core.setFailed('Provisioning failed with status:  ' + status);
+                        if (core.getInput('abortOnFailure') === 'true') {
+                            core.setFailed('Provisioning failed with status:  ' + status);
+                        }
                     }
                 });
             };

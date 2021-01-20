@@ -194,7 +194,7 @@ async function run(): Promise<void> {
     return postToEM<EMProvisionResult>('/api/v2/provisions', {
         environmentId: environmentId,
         instanceId: instanceId,
-        abortOnFailure: false
+        abortOnFailure: core.getInput('abortOnFailure') === 'true'
     });
   }).then((res: EMProvisionResult) => {
     var eventId = res.eventId;
@@ -210,7 +210,9 @@ async function run(): Promise<void> {
                 core.warning('Provisioning canceled.');
             } else {
                 core.error('Provisioning failed with status:  ' + status);
-                core.setFailed('Provisioning failed with status:  ' + status);
+                if (core.getInput('abortOnFailure') === 'true') {
+                  core.setFailed('Provisioning failed with status:  ' + status);
+                }
             }
         });
     };
