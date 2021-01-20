@@ -20,6 +20,9 @@ inputs:
   instance:
     required: true
     description: 'Name of the environment instance to provision'
+  abortOnFailure:
+    required: false
+    description: 'Fail action and abort on provisioning failure'
   copyToVirtualize:
     required: false
     description: 'Virtual assets in the environment will be replicated on another server'
