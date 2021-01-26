@@ -5,7 +5,6 @@ import http = require('http');
 import https = require('https');
 import q = require('q');
 import url = require('url');
-import {wait} from './wait'
 
 var emBaseURL = url.parse(core.getInput('ctpUrl'));
 if (emBaseURL.path === '/') {
