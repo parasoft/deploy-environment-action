@@ -1,6 +1,9 @@
 name: 'Deploy Environment'
 description: 'Deploy a Parasoft Service Virtualization environment'
 author: 'Parasoft'
+branding:
+  icon: 'aperture'
+  color: 'blue'
 inputs:
   ctpUrl:
     required: true
