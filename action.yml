@@ -1,4 +1,4 @@
-name: 'Deploy Task'
+name: 'Deploy Environment'
 description: 'Deploy a Parasoft Service Virtualization environment'
 author: 'Parasoft'
 inputs:
