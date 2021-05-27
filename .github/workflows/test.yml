@@ -14,16 +14,4 @@ jobs:
       - run: |
           npm install
       - run: |
-          npm run build
-  test: # make sure the action works on a clean machine without building
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./
-        with:
-          ctpUrl: 'http://104.42.225.105/em'
-          ctpUsername: 'admin'
-          ctpPassword: 'admin'
-          system: 'ParaBank'
-          environment: 'Golden'
-          instance: 'Negative'
+          npm run all

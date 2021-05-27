@@ -48,7 +48,7 @@ export async function run() {
                 "password": core.getInput('repoPassword'),
             }
             copyEnv.dataRepoSettings = dataRepoSettings;
-            console.log("Data repo host: " + dataRepoSettings.host);
+            core.debug("Data repo host: " + dataRepoSettings.host);
         }
         return ctpService.postToEM<EMEnvironmentCopyResult>('/api/v2/environments/copy?async=false', copyEnv);
     }).then((copyResult: EMEnvironmentCopyResult) => {
@@ -57,6 +57,7 @@ export async function run() {
     });
   }
   instancesPromise.then((instance: EMEnvironmentInstance) => {
+    core.info('Deploying environment "' + environmentName + '" to ' + instanceName);
     instanceId = instance.id;
     return ctpService.postToEM<EMProvisionResult>('/api/v2/provisions', {
         environmentId: environmentId,
@@ -72,13 +73,13 @@ export async function run() {
             if (status === 'running' || status === 'waiting') {
                 setTimeout(checkStatus, 1000);
             } else if (status === 'success') {
-                core.debug('Successfully provisioned ' + core.getInput('instance'));
+                core.info('Successfully provisioned ' + instanceName);
             } else if (status === 'canceled') {
                 core.warning('Provisioning canceled.');
             } else {
                 core.error('Provisioning failed with status:  ' + status);
                 if (core.getInput('abortOnFailure') === 'true') {
-                  core.setFailed('Provisioning failed with status:  ' + status);
+                    core.setFailed('Provisioning failed with status:  ' + status);
                 }
             }
         });

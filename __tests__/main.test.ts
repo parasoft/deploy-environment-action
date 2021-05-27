@@ -94,17 +94,19 @@ test('test basic deploy environment', () => {
 });
 
 // shows how the runner will run a javascript action with env / stdout protocol
-// test('test runs', () => {
-//   process.env['INPUT_CTPURL'] = 'http://104.42.225.105/em'
-//   process.env['INPUT_CTPUSERNAME'] = 'admin'
-//   process.env['INPUT_CTPPASSWORD'] = 'admin'
-//   process.env['INPUT_SYSTEM'] = 'ParaBank'
-//   process.env['INPUT_ENVIRONMENT'] = 'Golden'
-//   process.env['INPUT_INSTANCE'] = 'Negative'
-//   const np = process.execPath
-//   const ip = path.join(__dirname, '..', 'lib', 'main.js')
-//   const options: cp.ExecFileSyncOptions = {
-//     env: process.env
-//   }
-//   console.log(cp.execFileSync(np, [ip], options).toString())
-// })
+/*
+test('test runs', () => {
+  process.env['INPUT_CTPURL'] = 'http://34.221.143.134:8080/em/'
+  process.env['INPUT_CTPUSERNAME'] = 'demo'
+  process.env['INPUT_CTPPASSWORD'] = 'demo-user'
+  process.env['INPUT_SYSTEM'] = 'ParaBank'
+  process.env['INPUT_ENVIRONMENT'] = 'Retail Services (Silo 1)'
+  process.env['INPUT_INSTANCE'] = 'Negative'
+  const np = process.execPath
+  const ip = path.join(__dirname, '..', 'lib', 'main.js')
+  const options: cp.ExecFileSyncOptions = {
+    env: process.env
+  }
+  console.log(cp.execFileSync(np, [ip], options).toString())
+})
+*/
